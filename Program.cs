@@ -31,7 +31,7 @@ namespace Launcher
             {
                 const string ClientPath = @"\content\";
                 string clientdir = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + ClientPath;
-                string client = "1.4.7";
+                string client = "Forge-1.4.7";
                 string user = "Anonymous";
                 string uuid = Guid.NewGuid().ToString();
                 string session = "0";
@@ -57,8 +57,8 @@ namespace Launcher
 			JObject versions = json(clientdir, client);
 			assetInd(versions);
 			JArray libraries = (JArray)versions["libraries"];
-			string assetsdir = "assets";
-			string gameassets = assetsdir + @"\virtual\legacy";
+			string assetsdir = clientdir + @"assets\virtual\legacy";
+			string gameassets = assetsdir;// + @"\virtual\legacy"; // Because Pre 1.6 dont support new argument type...
 			string url = @"-Xmx3G -Xms3G -Xmn128m -XX:+DisableExplicitGC -XX:+UseNUMA -XX:+CMSParallelRemarkEnabled -XX:MaxTenuringThreshold=15 -XX:MaxGCPauseMillis=30 -XX:GCPauseIntervalMillis=150 -XX:+UseAdaptiveGCBoundary -XX:-UseGCOverheadLimit -XX:+UseBiasedLocking -XX:SurvivorRatio=8 -XX:TargetSurvivorRatio=90 -XX:MaxTenuringThreshold=15 -XX:+UseCompressedOops -XX:+OptimizeStringConcat -XX:ReservedCodeCacheSize=1024m -XX:+UseCodeCacheFlushing -XX:SoftRefLRUPolicyMSPerMB=2000 -XX:ParallelGCThreads=10 -Dfml.ignorePatchDiscrepancies=true -Dfml.ignoreInvalidMinecraftCertificates=true -Djava.library.path=versions\" + client + @"\natives -cp ";
 			url = libs(libraries, url, clientdir, client, client);
 			url += @"versions\" + clientjar + @"\" + clientjar + ".jar ";
